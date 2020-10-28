@@ -15,6 +15,7 @@ import {
   Text,
   StatusBar,
   Button,
+  TouchableOpacity,
 } from 'react-native';
 
 import {
@@ -29,14 +30,67 @@ export default class App extends Component {
 
   constructor(){
     super()
-    this.state={}
+    this.state={
+      resultsText:""
+    }
   }
+
+  buttonPress(text){
+
+    if(text=="="){
+      return this.calculateValue(this.state.resultsText)
+    }
+    this.setState({
+      resultsText:this.state.resultsText+text
+    })
+
+  }
+  calculateValue(text){
+     text = this.state.resultsText
+  }
+
+  operate(operations){
+
+    switch(operations){
+      case 'D':
+        let text = this.state.resultsText.split('')
+        text.pop()
+      
+        this.setState({
+          resultsText:text.join('')
+        })
+    }
+
+
+
+  }
+
   render (){
+
+    let rows = []
+    let numbrs =[[1,2,3],[4,5,6],[7,8,9],[".",0,"="]]
+    for(let i=0;i<4;i++){
+      let row = []
+      for (let j = 0; j < 3; j++) {
+        row.push( <TouchableOpacity onPress={()=> this.buttonPress(numbrs[i][j])} style={styles.btn}><Text style={styles.btnText}>{numbrs[i][j]}</Text></TouchableOpacity>)
+        
+      }
+      rows.push(<View style={styles.row}>{row}</View>)
+    }
+
+    let operations = ['D','+','-','*','/']
+    let ops=[]
+    for (let i = 0; i < 5; i++) {
+      ops.push(<TouchableOpacity onPress={()=>this.operate(operations[i])} style={styles.btn}><Text style={[styles.btnText,styles.white]}>{operations[i]}</Text></TouchableOpacity>)
+      
+    }
+
+
     return (
 
       <View style={styles.container}>
            <View style={styles.result}>
-             <Text style={styles.resultText}>2121</Text>
+             <Text style={styles.resultText}>{this.state.resultsText}</Text>
            </View>
            <View style={styles.claculation}>
 
@@ -45,36 +99,14 @@ export default class App extends Component {
            <View style={styles.buttons}>
 
            <View style={styles.numbers}>
-           <View style={styles.row}>
-            <Button title="0"/>
-            <Button title="0"/>
-            <Button title="0"/>
-           </View>
-           <View style={styles.row}>
 
-            <Button title="0"/>
-            <Button title="0"/>
-            <Button title="0"/>
+            {rows}
 
            </View>
-           <View style={styles.row}>
-            <Button title="0"/>
-            <Button title="0"/>
-            <Button title="0"/>
-           </View>
-           <View style={styles.row}>
-            <Button title="0"/>
-            <Button title="0"/>
-            <Button title="0"/>
-           </View>
-
-           </View>
+          
            <View style={styles.operations}>
 
-           <Button title="+"/>
-            <Button title="+"/>
-            <Button title="+"/>
-            <Button title="+"/>
+           {ops}
 
            </View>
 
@@ -140,6 +172,19 @@ resultText:{
   fontSize:20,
   color:"#ffffff",
 
+},
+btn:{
+  flex:1,
+  alignItems:"center",
+  alignSelf:"stretch",
+  justifyContent:"center"
+},
+btnText:{
+  fontSize:30,
+
+},
+white:{
+  color:"#ffffff"
 }
 
 
