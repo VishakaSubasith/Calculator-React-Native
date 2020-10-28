@@ -14,6 +14,7 @@ import {
   View,
   Text,
   StatusBar,
+  Button,
 } from 'react-native';
 
 import {
@@ -34,12 +35,48 @@ export default class App extends Component {
     return (
 
       <View style={styles.container}>
-           <View style={styles.result}></View>
-           <View style={styles.claculation}></View>
+           <View style={styles.result}>
+             <Text style={styles.resultText}>2121</Text>
+           </View>
+           <View style={styles.claculation}>
+
+           <Text style={styles.clactext}>9465</Text>
+           </View>
            <View style={styles.buttons}>
 
-           <View style={styles.numbers}></View>
-           <View style={styles.operations}></View>
+           <View style={styles.numbers}>
+           <View style={styles.row}>
+            <Button title="0"/>
+            <Button title="0"/>
+            <Button title="0"/>
+           </View>
+           <View style={styles.row}>
+
+            <Button title="0"/>
+            <Button title="0"/>
+            <Button title="0"/>
+
+           </View>
+           <View style={styles.row}>
+            <Button title="0"/>
+            <Button title="0"/>
+            <Button title="0"/>
+           </View>
+           <View style={styles.row}>
+            <Button title="0"/>
+            <Button title="0"/>
+            <Button title="0"/>
+           </View>
+
+           </View>
+           <View style={styles.operations}>
+
+           <Button title="+"/>
+            <Button title="+"/>
+            <Button title="+"/>
+            <Button title="+"/>
+
+           </View>
 
 
            </View>
@@ -64,11 +101,15 @@ container:{
 },
 result:{
   flex:2,
-  backgroundColor:"red"
+  backgroundColor:"red",
+  justifyContent:"center",
+  alignItems:"flex-end"
 },
 claculation:{
   flex:1,
-  backgroundColor:"green"
+  backgroundColor:"green",
+  justifyContent:"center",
+  alignItems:"flex-end"
 },
 buttons:{
   flex:6,
@@ -80,8 +121,27 @@ numbers:{
 },
 operations:{
   flex:1,
-  backgroundColor:"black"
+  backgroundColor:"black",
+  justifyContent:"space-around",
+  alignItems:"stretch"
+},
+row:{
+  flex:1,
+  flexDirection:"row",
+  justifyContent:"space-around",
+  alignItems:"center"
+},
+clactext:{
+  fontSize:24,
+  color:"#ffffff",
+
+},
+resultText:{
+  fontSize:20,
+  color:"#ffffff",
+
 }
+
 
 
 });
